@@ -11,18 +11,18 @@ class IdeaController extends Controller
 
     public function show(Idea $idea){
 
+     
+
         return view('ideas.show',compact('idea'));
     }
 
     public function store(){
 
-        request() -> validate([
+        $validated = request() -> validate([
             'content' => 'required|min:5|max:240'
         ]);
-
-        $idea =  Idea::create([
-            'content' => request()->get('content',''),
-        ]);
+        
+        Idea::create($validated);
 
         return redirect() -> route('dashboard')->with('success', "Idea created successfully");
       
