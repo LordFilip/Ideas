@@ -12,13 +12,20 @@
                 @include('shared.success-message')
                 @include('shared.submit-idea')
                 <hr>
-                @foreach ($ideas as $idea)
+            
+                @forelse ($ideas as $idea)
                 <div class="mt-3">
                   
                   @include('shared.idea-card')
                 </div>
-                @endforeach
-                {{$ideas -> links()}}
+                @empty
+
+                 <p class="text-center mt-4">No Results Found.</p>
+          
+                @endforelse
+             
+               
+                {{$ideas -> withQueryString() -> links()}}
             </div>
             <div class="col-3">
               
