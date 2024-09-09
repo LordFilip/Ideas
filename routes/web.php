@@ -24,6 +24,9 @@ Route::post('users/{user}/follow',[FollowerController::class,'follow'])->middlew
 
 Route::post('users/{user}/unfollow',[FollowerController::class,'unfollow'])->middleware('auth')->name('users.unfollow');
 
+Route::get('/terms', function () {
+    return view('terms');
+})->name('terms');
 
 
 
@@ -50,7 +53,3 @@ Route::post('/logout',[AuthController::class,'logout'])->name('logout');
 
 
 
-
-Route::get('/terms', function(){
-    return view('terms');
-});
