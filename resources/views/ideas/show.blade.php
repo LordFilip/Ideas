@@ -15,7 +15,7 @@
           
                 <div class="mt-3">
                   
-                  @include('shared.idea-card')
+                  @include('ideas.shared.idea-card')
                 </div>
           
             </div>

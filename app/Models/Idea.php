@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\Comment;
 
 class Idea extends Model
 {
@@ -13,7 +15,6 @@ class Idea extends Model
 
     protected $fillable = [
         'content',
-        'like',
         'user_id',
     ];
 
@@ -23,5 +24,9 @@ class Idea extends Model
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function likes(){
+        return $this->belongsToMany(User::class, 'idea_like')->withTimestamps();
     }
 }
