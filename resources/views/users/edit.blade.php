@@ -22,7 +22,7 @@
                 @forelse ($ideas as $idea)
                 <div class="mt-3">
                   
-                  @include('shared.idea-card')
+                  @include('ideas.shared.idea-card')
                 </div>
                 @empty
 
