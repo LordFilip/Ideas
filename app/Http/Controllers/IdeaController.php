@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Idea;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class IdeaController extends Controller
 {
@@ -30,11 +31,13 @@ class IdeaController extends Controller
       
     }
 
-    public function destroy(Idea $id){
+    public function destroy(Idea $idea){
 
-        if(auth()->id() !== $idea->user_id){
+    /*    if(auth()->id() !== $idea->user_id){
             abort(404);
         }
+*/
+         $this->authorize('idea.delete',$idea);
 
        $idea->delete();
 
@@ -44,9 +47,13 @@ class IdeaController extends Controller
 
     public function edit(Idea $idea){
 
-        if(auth()->id() !== $idea->user_id){
+    /*    if(auth()->id() !== $idea->user_id){
             abort(404);
         }
+
+        */
+
+        $this->authorize('idea.edit',$idea);
 
         $editing = true;
 
@@ -55,9 +62,14 @@ class IdeaController extends Controller
 
     public function update(Idea $idea){
 
-        if(auth()->id() !== $idea->user_id){
+
+
+    /*    if(auth()->id() !== $idea->user_id){
             abort(404);
         }
+            */ 
+
+            $this->authorize('idea.edit',$idea);
 
         request() -> validate([
             'content' => 'required|min:5|max:240'
