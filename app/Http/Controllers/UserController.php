@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -36,22 +37,15 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(User $user)
+    public function update(UpdateUserRequest $request ,User $user)
     {
 
-        Gate::authorize('update',$user);
-        
-        $validated = request() -> validate(
-           [ 
-            'name' => 'required|min:3|max:40',
-            'bio' =>  'nullable|min:1|max:250',
-            "image" => "image",
-           ]
+       
 
-        );
+        $validated = $request->validated();
 
-        if(request()->has('image')){
-            $imagePath = request()->file('image')->store("profile", 'public');
+        if($request->has('image')){
+            $imagePath = $request->file('image')->store("profile", 'public');
             $validated['image'] = $imagePath;
 
             Storage::disk('public')->delete($user->image ?? '');
