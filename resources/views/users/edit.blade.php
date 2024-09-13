@@ -1,6 +1,8 @@
 @extends('layout.layout')
 
 
+@section('title', 'Edit Profile')
+
 @section('content')
     
 
