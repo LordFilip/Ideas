@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Idea;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Gate;
 
 class IdeaController extends Controller
 {
@@ -37,7 +37,7 @@ class IdeaController extends Controller
             abort(404);
         }
 */
-         $this->authorize('idea.delete',$idea);
+         Gate::authorize('delete',$idea);
 
        $idea->delete();
 
@@ -53,7 +53,7 @@ class IdeaController extends Controller
 
         */
 
-        $this->authorize('idea.edit',$idea);
+        Gate::authorize('update',$idea);
 
         $editing = true;
 
@@ -69,7 +69,7 @@ class IdeaController extends Controller
         }
             */ 
 
-            $this->authorize('idea.edit',$idea);
+            Gate::authorize('update',$idea);
 
         request() -> validate([
             'content' => 'required|min:5|max:240'

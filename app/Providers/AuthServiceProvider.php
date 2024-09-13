@@ -26,13 +26,15 @@ class AuthServiceProvider extends ServiceProvider
             return (bool) $user->is_admin;
         });
 
-        $gate->define('idea.delete', function(User $user, Idea $idea) : bool {
+      /*  $gate->define('idea.delete', function(User $user, Idea $idea) : bool {
             return ((bool) $user->is_admin || $user->id === $idea->user_id);
         });
 
         $gate->define('idea.edit', function(User $user, Idea $idea) : bool {
             return ((bool) $user->is_admin || $user->id === $idea->user_id);
         });
+
+        */
     }
 
 
